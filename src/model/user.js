@@ -1,28 +1,23 @@
-const dbPool = require('../config/database');
+import dbPool from '../config/database.js';
 
-const getAllUser = () => {
-    const SQLQuery = 'SELECT * FROM user';
-    return dbPool.execute(SQLQuery);
+const getUserByEmail = (email) => {
+    const SQLQuery = 'SELECT * FROM user WHERE email = ?';
+    return dbPool.execute(SQLQuery, [email]);
 }
 
-const createNewUser = (body) => {
-    const SQLQuery = `INSERT INTO user(name,email,address) VALUES('${body.name}','${body.email}','${body.address}')`;
-    return dbPool.execute(SQLQuery);
+const createNewUser = (userData) => {
+    const SQLQuery = 'INSERT INTO user(name,email,password,provider) VALUES(?, ?, ?, ?)';
+    values = [
+        userData.name,
+        userData.email,
+        userData.password,
+        userData.provider || 'local'
+    ];
+    return dbPool.execute(SQLQuery, values);
 }
 
-const updateUser = (body, idUser) => {
-    const SQLQuery = `UPDATE user SET name='${body.name}', email='${body.email}', address='${body.address}' WHERE id=${idUser}`
-    return dbPool.execute(SQLQuery);
-}
 
-const deleteUser = (idUser) => {
-    const SQLQuery = `DELETE FROM user WHERE id=${idUser}`
-    return dbPool.execute(SQLQuery);
-}
-
-module.exports = {
-    getAllUser,
-    createNewUser,
-    updateUser,
-    deleteUser
+export default {
+    getUserByEmail,
+    createNewUser
 }

@@ -1,4 +1,4 @@
-const dbPool = require('../config/database');
+import dbPool from '../config/database.js';
 
 const AddJobs = (job) => {
     const SQLQuery = `INSERT INTO jobs(title, description, location, company, salary) VALUES(?,?,?,?,?)`;
@@ -15,4 +15,4 @@ const AddJobs = (job) => {
     })
 }
 
-module.exports = {AddJobs};
+export default {AddJobs};

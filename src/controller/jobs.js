@@ -1,5 +1,5 @@
-const JobsModel = require('../model/jobs');
-const axios = require('axios');
+import JobsModel from '../model/jobs.js';
+import axios from 'axios';
 
 
 const getAdzunaJobs = async (req,res) => {
@@ -31,4 +31,4 @@ const getAdzunaJobs = async (req,res) => {
     }
 }
 
-module.exports = {getAdzunaJobs};
+export default {getAdzunaJobs};

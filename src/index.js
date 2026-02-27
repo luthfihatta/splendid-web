@@ -1,11 +1,11 @@
-require('dotenv').config();
-const express = require('express');
+import 'dotenv/config'
+import express from "express";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-const logMiddleware = require('./middleware/log')
-const userRoutes = require('./routes/user')
-const jobsRoutes = require('./routes/jobs')
+import logMiddleware from './middleware/log.js'; 
+import userRoutes from './routes/user.js';
+import jobsRoutes from './routes/jobs.js';
 
 app.use(logMiddleware);
 app.use(express.json());

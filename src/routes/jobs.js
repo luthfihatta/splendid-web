@@ -1,7 +1,7 @@
-const express = require('express');
-const JobsController = require('../controller/jobs');
+import express from 'express';
+import JobsController from '../controller/jobs.js';
 const router = express.Router();
 
 router.get('/api/fetch-jobs', JobsController.getAdzunaJobs);
 
-module.exports = router;
+export default router;
