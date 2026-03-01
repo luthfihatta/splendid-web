@@ -16,6 +16,6 @@ const addJob = (job) => {
     ];
 
     return dbPool.query(SQLQuery, values);
-}
+};
 
 export default {addJob};
