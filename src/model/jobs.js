@@ -1,18 +1,21 @@
 import dbPool from '../config/database.js';
 
-const AddJobs = (job) => {
-    const SQLQuery = `INSERT INTO jobs(title, description, location, company, salary) VALUES(?,?,?,?,?)`;
+const addJob = (job) => {
+    const SQLQuery = `INSERT IGNORE INTO jobs(external_id, title, company, location, description, salary, url, source, job_type, posted_at) VALUES(?,?,?,?,?,?,?,?,?,?)`;
     const values = [
+        job.external_id,
         job.title,
+        job.company,
+        job.location,
         job.description,
-        job.location.display_name,
-        job.company.display_name,
-        job.salary_min
-    ]
+        job.salary,
+        job.url,
+        job.source,
+        job.job_type,
+        job.posted_at
+    ];
 
-    dbPool.query(SQLQuery, values, (err, result) => {
-        if (err) console.error("Data pekerjaan tidak tersimpan, ", err.message);
-    })
+    return dbPool.query(SQLQuery, values);
 }
 
-export default {AddJobs};
+export default {addJob};

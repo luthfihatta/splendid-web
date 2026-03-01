@@ -9,7 +9,7 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export const register = async (req, res) => {
     const {name, email, password} = req.body;
     if (!name || !email || !password) {
-        res.status(400).json({ message: "Name, email, and password are required!"})
+        return res.status(400).json({ message: "Name, email, and password are required!"})
     }
     try {
         const [existingUser] = await UserModel.getUserByEmail(email);
@@ -27,9 +27,9 @@ export const register = async (req, res) => {
         };
 
         await UserModel.createNewUser(userData);
-        res.status(201).json({ message: 'Registration successful. Please log in'})
+        return res.status(201).json({ message: 'Registration successful. Please log in'})
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: 'Server Error',
             serverMessage: error
         })
@@ -40,7 +40,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const {email, password} = req.body;
     if (!email || !password) {
-        res.status(400).json({message: 'Email and password are required!'})
+        return res.status(400).json({message: 'Email and password are required!'})
     }
     try {
         const [users] = await UserModel.getUserByEmail(email);
@@ -77,7 +77,7 @@ export const login = async (req, res) => {
         });
     } catch (error) {
         console.error("Login Error:", error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Server Error",
             serverMessage: error.message
         });
@@ -88,7 +88,7 @@ export const login = async (req, res) => {
 export const googleLogin = async (req, res) => {
     const {googleToken} = req.body;
     if (!googleToken) {
-        res.status(400).json({message: 'Google token is required!'})
+        return res.status(400).json({message: 'Google token is required!'})
     }
     try {
         const ticket = await googleClient.verifyIdToken({
@@ -134,7 +134,7 @@ export const googleLogin = async (req, res) => {
         })
     } catch (error) {
         console.error("Google Auth Error:", error.message);
-        res.status(401).json({
+        return res.status(401).json({
             message: "Invalid or expired Google Token"
         });
     }

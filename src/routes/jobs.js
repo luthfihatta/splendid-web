@@ -1,7 +1,8 @@
 import express from 'express';
-import JobsController from '../controller/jobs.js';
+import { fetchJoobleJobs, fetchAdzunaJobs } from '../controller/jobs.js';
 const router = express.Router();
 
-router.get('/api/fetch-jobs', JobsController.getAdzunaJobs);
+router.post('/api/fetch-jooble', fetchJoobleJobs);
+router.post('/api/fetch-adzuna', fetchAdzunaJobs);
 
 export default router;
