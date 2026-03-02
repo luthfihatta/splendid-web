@@ -41,7 +41,7 @@ export const unsaveJob = async (req, res) => {
     const user_id = req.user.id;
 
     try {
-        const [result] = await SavedJobsModel.unsaveJob(job_id, user_id);
+        const [result] = await SavedJobsModel.unsaveJob(user_id, job_id);
 
         if (result.affectedRows === 0) {
             res.status(404).json({ message: "Job not found in your saved list"});

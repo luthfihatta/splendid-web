@@ -133,3 +133,33 @@ export const fetchAdzunaJobs = async (req,res) => {
         });
     };
 };
+
+export const getPublicJobs = async (req,res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const search = req.query.search || '';
+        const source  = req.query.source || '';
+
+        const offset = (page - 1)*limit;
+        const result = await JobsModel.getAllJobs({search, source, limit, offset});
+        const totalPages = Math.ceil(result.total/limit);
+
+        res.status(200).json({
+            message: "Successfully fetched jobs",
+            data:result.data,
+            pagination: {
+                total_items: result.total,
+                total_pages: totalPages,
+                currentPage: page,
+                limit_per_page: limit
+            }
+        });
+    } catch (error) {
+        console.error("GET Public Jobs Error:", error.message);
+        res.status(500).json({
+            message: "Server error while fetching public jobs",
+            serverMessage: error.message
+        })
+    }
+}
