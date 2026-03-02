@@ -21,8 +21,8 @@ const addJob = (job) => {
 const getAllJobs = async (filters) => {
     const {search, source, limit, offset} = filters;
 
-    const SQLQuery = `SELECT * FROM jobs`;
-    const countQuery = `SELECT COUNT(jobs) as total FROM jobs`;
+    let SQLQuery = `SELECT * FROM jobs`;
+    let countQuery = `SELECT COUNT(*) as total FROM jobs`;
 
     let whereClauses = [];
     let values = [];
@@ -44,12 +44,10 @@ const getAllJobs = async (filters) => {
         countQuery += whereString;
     }
 
-    SQLQuery += 'ORDER BY posted_at DESC LIMIT ? OFFSET ?';
-    values.push(Number(limit), Number(offset));
+    SQLQuery += ` ORDER BY posted_at DESC LIMIT ${limit} OFFSET ${offset}`;
 
     const [data] = await dbPool.execute(SQLQuery, values);
-    const countValues = values.slice(0, values.length - 2);
-    const [countResult] = await dbPool.execute(SQLQuery, countValues);
+    const [countResult] = await dbPool.execute(countQuery, values);
 
     return {
         data: data,
