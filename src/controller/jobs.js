@@ -34,7 +34,7 @@ export const fetchJoobleJobs = async (req,res) => {
                     title: job.title || "No Title",
                     company: job.company || "Unknown Company",
                     location: job.location || "Remote/Unspecified",
-                    description: job.snippet || "",
+                    description: cleanJobDescription(job.snippet) || "",
                     salary: job.salary || "Not specified",
                     url: job.link || "",
                     source: "Jooble",
@@ -103,7 +103,7 @@ export const fetchAdzunaJobs = async (req,res) => {
                     title: job.title || "No Title",
                     company: job.company?.display_name || "Unknown Company",
                     location: job.location?.display_name || "Remote/Unspecified",
-                    description: job.description || "",
+                    description: cleanJobDescription(job.description) || "",
                     salary: job.salary_min ? `$${job.salary_min} - $${job.salary_max}` : "Not specified",
                     url: job.redirect_url || "",
                     source: "Adzuna",
@@ -162,4 +162,14 @@ export const getPublicJobs = async (req,res) => {
             serverMessage: error.message
         })
     }
+};
+
+export const cleanJobDescription = (text) => {
+    if (!text) return "";
+    return text
+        .replace(/<[^>]*>?/gm, '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/\r\n|\n|\r/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
 }
