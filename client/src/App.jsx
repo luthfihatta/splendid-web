@@ -9,6 +9,11 @@ function App() {
   return (
     <>
       <div>
+        <nav className="p-5 bg-blue-600 text-white flex gap-6 mb-6 shadow-md">
+          <Link to="/" className="hover:text-blue-200 font-semibold">Home</Link>
+          <Link to="/login" className="hover:text-blue-200 font-semibold">Login / Register</Link>
+          <Link to="/saved-jobs" className="hover:text-blue-200 font-semibold">My Saved Jobs</Link>
+        </nav>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

@@ -12,7 +12,7 @@ app.use(logMiddleware);
 app.use(express.json());
 
 app.listen(PORT, () => {
-    console.log(`Server berhasil running di port ${PORT}`);
+    console.log(`Server successfully running at port ${PORT}`);
 });
 
 app.use('/user', userRoutes);
