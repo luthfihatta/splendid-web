@@ -1,11 +1,11 @@
-import {Link, useLocation} from "react";
+import {Link, useLocation} from "react-router-dom";
 
 const Sidebar = () => {
     const location = useLocation();
     const isActive = (path) => location.pathname === path ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50";
 
     return (
-        <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col hidden md:flex">
+        <aside className="w-64 bg-white border-r border-gray-200 h-screen flex-col hidden md:flex">
             <div className="h-16 flex items-center px-6 border-b border-gray-100">
                 <span className="text-2xl font-black text-blue-600 tracking-tighter">Aggregator.</span>
             </div>
