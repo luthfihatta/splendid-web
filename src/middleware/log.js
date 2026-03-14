@@ -1,5 +1,5 @@
 const logReq = (req, res, next) => {
-    console.log("Log req ke API ini, PATH:", req.path);
+    console.log("Log Req to this API, PATH:", req.path);
     next(); 
 }
 

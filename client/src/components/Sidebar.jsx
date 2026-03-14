@@ -6,8 +6,8 @@ const Sidebar = () => {
 
     return (
         <aside className="w-64 bg-white border-r border-gray-200 h-screen flex-col hidden md:flex">
-            <div className="h-16 flex items-center px-6 border-b border-gray-100">
-                <span className="text-2xl font-black text-blue-600 tracking-tighter">Aggregator.</span>
+            <div className="h-20 flex items-center px-6 border-b border-gray-100">
+                <img src="../../public/splendid-logo.png" alt="splendid-logo" className="mt-4 w-32"/>
             </div>
             <nav className="flex-1 px-4 py-6 space-y-2">
                 <Link to="/" className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${isActive('/')}`}>
